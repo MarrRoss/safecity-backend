@@ -1,0 +1,1317 @@
+basePath: /
+definitions:
+  AddFamilyMembershipResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  AddFamilyRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  AddFamilyResponse:
+    properties:
+      family_id:
+        type: string
+      membership_id:
+        type: string
+    type: object
+  AddFamilyZoneResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  AddInvitationResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  AddInvitationToFamilyRequest:
+    properties:
+      family_id:
+        format: uuid
+        type: string
+      role_id:
+        format: int
+        type: integer
+    type: object
+  AddNotificationSettingRequest:
+    properties:
+      event_type:
+        $ref: '#/definitions/NotificationEventType'
+      frequency_id:
+        format: uuid
+        type: string
+      min_battery:
+        format: int
+        type: integer
+      sender_id:
+        format: uuid
+        type: string
+      zone_id:
+        format: uuid
+        type: string
+    type: object
+  AddNotificationSettingResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  AddTgConnectRequest:
+    properties:
+      tg_id:
+        format: string
+        type: string
+      user_id:
+        format: uuid
+        type: string
+    type: object
+  AddUserLocationRequest:
+    properties:
+      battery:
+        format: int
+        type: integer
+      latitude:
+        format: float64
+        type: number
+      longitude:
+        format: float64
+        type: number
+    type: object
+  AddUserRequest:
+    properties:
+      email:
+        type: string
+      external_id:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      login:
+        type: string
+    type: object
+  AddUserResponse:
+    properties:
+      id:
+        type: string
+    type: object
+  AddZoneRequest:
+    properties:
+      boundaries:
+        items:
+          $ref: '#/definitions/request.LocationModel'
+        type: array
+      name:
+        type: string
+      safety:
+        type: boolean
+    type: object
+  BaseResponse:
+    properties:
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-AddFamilyMembershipResponse:
+    properties:
+      data:
+        $ref: '#/definitions/AddFamilyMembershipResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-AddFamilyResponse:
+    properties:
+      data:
+        $ref: '#/definitions/AddFamilyResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-AddFamilyZoneResponse:
+    properties:
+      data:
+        $ref: '#/definitions/AddFamilyZoneResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-AddInvitationResponse:
+    properties:
+      data:
+        $ref: '#/definitions/AddInvitationResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-AddNotificationSettingResponse:
+    properties:
+      data:
+        $ref: '#/definitions/AddNotificationSettingResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-AddUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/AddUserResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-GetUserResponse:
+    properties:
+      data:
+        $ref: '#/definitions/GetUserResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-InvitationResponse:
+    properties:
+      data:
+        $ref: '#/definitions/InvitationResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-array_GetFamilyMembershipResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/GetFamilyMembershipResponse'
+        type: array
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-array_GetNotificationSettingResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/GetNotificationSettingResponse'
+        type: array
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-array_GetUserResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/GetUserResponse'
+        type: array
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-array_GetZoneResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/GetZoneResponse'
+        type: array
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-array_response_GetNotificationFrequencyResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/response.GetNotificationFrequencyResponse'
+        type: array
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-array_response_GetUserLocationResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/response.GetUserLocationResponse'
+        type: array
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-response_AddUserLocationResponse:
+    properties:
+      data:
+        $ref: '#/definitions/response.AddUserLocationResponse'
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  BaseResponseData-string:
+    properties:
+      data:
+        type: string
+      error:
+        type: string
+      status:
+        type: string
+    type: object
+  ChangeFamilyMembershipRequest:
+    properties:
+      role_id:
+        $ref: '#/definitions/RoleType'
+    type: object
+  ChangeFamilyRequest:
+    properties:
+      name:
+        type: string
+    type: object
+  ChangeZoneRequest:
+    properties:
+      boundaries:
+        items:
+          $ref: '#/definitions/request.LocationModel'
+        type: array
+      name:
+        type: string
+      safety:
+        type: boolean
+    type: object
+  GetFamilyMembershipResponse:
+    properties:
+      family:
+        $ref: '#/definitions/response.GetFamilyResponse'
+      membership_id:
+        type: string
+      my_role:
+        type: string
+      participants:
+        items:
+          $ref: '#/definitions/response.GetMembershipParticipantResponse'
+        type: array
+    type: object
+  GetNotificationSettingResponse:
+    properties:
+      frequency:
+        $ref: '#/definitions/response.GetNotificationFrequencyResponse'
+      min_battery:
+        type: integer
+      notify_setting_id:
+        type: string
+      sender:
+        $ref: '#/definitions/GetUserResponse'
+    type: object
+  GetUserResponse:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      login:
+        type: string
+      tg_integrated:
+        type: boolean
+      tracking:
+        type: boolean
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  GetZoneResponse:
+    properties:
+      created_at:
+        type: string
+      updated_at:
+        type: string
+      zone_boundaries:
+        items:
+          $ref: '#/definitions/response.BoundariesModel'
+        type: array
+      zone_id:
+        type: string
+      zone_name:
+        type: string
+      zone_safety:
+        type: boolean
+    type: object
+  InvitationResponse:
+    properties:
+      author:
+        $ref: '#/definitions/GetUserResponse'
+      family:
+        $ref: '#/definitions/response.GetFamilyResponse'
+      invitation_id:
+        type: string
+      role:
+        $ref: '#/definitions/response.GetRoleByIDResponse'
+    type: object
+  NotificationEventType:
+    enum:
+    - zone
+    - battery
+    type: string
+    x-enum-varnames:
+    - ZoneNotificationEventType
+    - BatteryNotificationEventType
+  RoleType:
+    enum:
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - RoleParentType
+    - RoleChildType
+  request.LocationModel:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+    type: object
+  response.AddUserLocationResponse:
+    properties:
+      location_log_id:
+        type: string
+      notify_log_id:
+        items:
+          type: string
+        type: array
+    type: object
+  response.BoundariesModel:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+    type: object
+  response.GetFamilyResponse:
+    properties:
+      family_id:
+        type: string
+      family_name:
+        type: string
+    type: object
+  response.GetLocationResponse:
+    properties:
+      latitude:
+        type: number
+      longitude:
+        type: number
+    type: object
+  response.GetMembershipParticipantResponse:
+    properties:
+      membership_id:
+        type: string
+      role_name:
+        type: string
+      user:
+        $ref: '#/definitions/GetUserResponse'
+    type: object
+  response.GetNotificationFrequencyResponse:
+    properties:
+      frequency:
+        type: string
+      id:
+        type: string
+    type: object
+  response.GetRoleByIDResponse:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  response.GetUserLocationResponse:
+    properties:
+      location:
+        $ref: '#/definitions/response.GetLocationResponse'
+      user:
+        $ref: '#/definitions/GetUserResponse'
+    type: object
+host: localhost:3000
+info:
+  contact: {}
+  description: This is a sample swagger for diplom
+  title: Diplom Documentation
+  version: "1.0"
+paths:
+  /battery/notifications_settings:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_GetNotificationSettingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get user battery notify settings
+      tags:
+      - notifications
+  /families:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_GetFamilyMembershipResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get user families with members
+      tags:
+      - families
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Family data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddFamilyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-AddFamilyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add family
+      tags:
+      - families
+  /families/{id}:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      - description: Family data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeFamilyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Change family
+      tags:
+      - families
+  /families/{id}/senders:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: familyID
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_GetUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get available notification senders
+      tags:
+      - notifications
+  /families/{id}/zones:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_GetZoneResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get family zones
+      tags:
+      - zones
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      - description: Family and zone data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddZoneRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-AddFamilyZoneResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add family zone
+      tags:
+      - zones
+  /frequencies:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_response_GetNotificationFrequencyResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get frequencies
+      tags:
+      - notifications
+  /invitations:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Invitation data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddInvitationToFamilyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-AddInvitationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add invitation to family
+      tags:
+      - invitations
+  /invitations/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-InvitationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      summary: Get family invitations
+      tags:
+      - invitations
+  /invitations/{id}/join:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-AddFamilyMembershipResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add membership from invitation
+      tags:
+      - invitations
+  /me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-GetUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get me
+      tags:
+      - users
+  /memberships/{id}:
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      - description: Membership data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeFamilyMembershipRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Change membership role
+      tags:
+      - memberships
+  /notifications_settings:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Notification setting data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddNotificationSettingRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-AddNotificationSettingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add notification setting
+      tags:
+      - notifications
+  /tg_connect:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Integration connect data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddTgConnectRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      summary: Add integration connect
+      tags:
+      - integrations
+  /tg_link:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add integration link
+      tags:
+      - integrations
+  /users:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - in: query
+        name: login
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_GetUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get users
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-AddUserResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      summary: Add user
+      tags:
+      - users
+  /users/locations:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_response_GetUserLocationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get users locations
+      tags:
+      - locations
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Location data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/AddUserLocationRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-response_AddUserLocationResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Add user location
+      tags:
+      - locations
+  /users/tracking:
+    put:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Change user tracking
+      tags:
+      - users
+  /zones/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Delete zone
+      tags:
+      - zones
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      - description: Zone data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/ChangeZoneRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-string'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Change zone
+      tags:
+      - zones
+  /zones/{id}/notifications_settings:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - format: uuid
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/BaseResponseData-array_GetNotificationSettingResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/BaseResponse'
+      security:
+      - APIKeyAuth: []
+      summary: Get user notify settings by zone
+      tags:
+      - notifications
+securityDefinitions:
+  APIKeyAuth:
+    description: Access token from SSO
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
