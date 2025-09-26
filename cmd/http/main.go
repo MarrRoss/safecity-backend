@@ -34,14 +34,15 @@ import (
 	"awesomeProjectDDD/pkg/logging"
 	"awesomeProjectDDD/pkg/postgres"
 	"fmt"
+	"html/template"
+	"time"
+
 	"github.com/gofiber/contrib/fiberzerolog"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/rs/zerolog"
-	"html/template"
-	"time"
 )
 
 // @title            Diplom Documentation
@@ -120,47 +121,23 @@ func main() {
 	telegramService := telegram.NewService(httpClientTg)
 
 	dbUser, dbFamily, dbZone, dbRole, dbMembership, dbInvitationToFamily,
-		//dbMessengerType,
 		dbNotificationFrequency, dbNotificationSetting,
-		//dbNotificationType, dbNotSettingNotType, dbNotSettingMesType,
 		dbUserLocations, dbNotificationLog, dbIntegration, err := db.CreateStorages(observer, pg)
 
 	addUserCommand := user.NewAddUserHandler(dbUser, observer)
 	addUserHandler := userPres.NewAddUserHandler(addUserCommand, observer)
-	//getUserHandler := userPres.NewGetUserHandler(getUserQuery, observer)
 	getUsersCommand := user.NewGetAllUsersHandler(dbUser, observer)
 	getUsersHandler := userPres.NewGetAllUsersHandler(getUsersCommand, observer)
-
 	getUserQuery := user.NewGetUserHandler(observer, dbUser)
 	getMeHandler := userPres.NewGetMeHandler(getUserQuery, observer)
-	//changeUserCommand := user.NewChangeUserHandler(dbUser, observer)
-	//changeUserHandler := userPres.NewChangeUserHandler(changeUserCommand, observer)
 	changeUserTrackingCommand := user.NewChangeUserTrackingHandler(dbUser, observer)
 	changeUserTrackingHandler := userPres.NewChangeUserTrackingHandler(changeUserTrackingCommand, observer)
-	//deleteUserCommand := user.NewDeleteUserHandler(dbUser, dbMembership, observer)
-	//deleteUserHandler := userPres.NewDeleteUserHandler(deleteUserCommand, observer)
-	restoreUserCommand := user.NewRestoreUserHandler(dbUser)
-	restoreUserHandler := userPres.NewRestoreUserHandler(restoreUserCommand)
 
 	addFamilyCommand := family.NewAddFamilyHandler(dbFamily, dbUser, dbMembership, dbRole, observer)
 	addFamilyHandler := familyPres.NewAddFamilyHandler(addFamilyCommand, observer)
-	getFamilyCommand := family.NewGetFamilyHandler(dbFamily)
-	getFamilyHandler := familyPres.NewGetFamilyHandler(getFamilyCommand)
-	getUserFamiliesCommand := family.NewGetUserFamiliesHandler(dbFamily, dbUser)
-	getUserFamiliesHandler := familyPres.NewGetUserFamiliesHandler(getUserFamiliesCommand)
 	changeFamilyCommand := family.NewChangeFamilyHandler(dbFamily, observer)
 	changeFamilyHandler := familyPres.NewChangeFamilyHandler(changeFamilyCommand, observer)
-	deleteFamilyCommand := family.NewDeleteFamilyHandler(dbFamily)
-	deleteFamilyHandler := familyPres.NewDeleteFamilyHandler(deleteFamilyCommand)
 
-	//addZoneCommand := zone.NewAddZoneHandler(dbZone, dbFamily, observer)
-	//addZoneHandler := zonePres.NewAddZoneHandler(addZoneCommand, observer)
-	getZoneCommand := zone.NewGetZoneHandler(dbZone)
-	getZoneHandler := zonePres.NewGetZoneHandler(getZoneCommand)
-	getAllZonesCommand := zone.NewGetAllZonesHandler(dbZone)
-	getAllZonesHandler := zonePres.NewGetAllZonesHandler(getAllZonesCommand)
-	//getZonesByUserIDCommand := zone.NewGetZonesByUserIDHandler(dbZone, dbUser, observer)
-	//getZonesByUserIDHandler := zonePres.NewGetZonesByUserIDHandler(getZonesByUserIDCommand, observer)
 	changeZoneCommand := zone.NewChangeZoneHandler(dbZone, dbUser, observer)
 	changeZoneHandler := zonePres.NewChangeZoneHandler(changeZoneCommand, observer)
 	deleteZoneCommand := zone.NewDeleteZoneHandler(dbZone, dbUser, observer)
@@ -171,13 +148,7 @@ func main() {
 	addFamilyZoneHandler := familyPres.NewAddFamilyZoneHandler(addFamilyZoneCommand, observer)
 	getFamilyZonesCommand := family.NewGetFamilyZonesHandler(dbFamily, observer)
 	getFamilyZonesHandler := familyPres.NewGetFamilyZonesHandler(getFamilyZonesCommand, observer)
-	//deleteFamilyZoneCommand := family.NewDeleteFamilyZoneHandler(dbFamily, dbZone, observer)
-	//deleteFamilyZoneHandler := familyPres.NewDeleteFamilyZoneHandler(deleteFamilyZoneCommand, observer)
-	//deleteFamilyZonesCommand := family.NewDeleteFamilyZonesHandler(dbFamily)
-	//deleteFamilyZonesHandler := familyPres.NewDeleteFamilyZonesHandler(deleteFamilyZonesCommand)
 
-	//addRoleCommand := role.NewAddRoleHandler(dbRole)
-	//addRoleHandler := rolePres.NewAddRoleHandler(addRoleCommand)
 	getRoleCommand := role.NewGetRoleHandler(dbRole, hydraService)
 	getRoleHandler := rolePres.NewGetRoleHandler(getRoleCommand)
 	getAllRolesCommand := role.NewGetAllRolesHandler(dbRole)
@@ -185,8 +156,6 @@ func main() {
 
 	getUserMembershipsCommand := membershipApp.NewGetUserMembershipsHandler(dbMembership, dbUser, dbFamily, observer)
 	getUserMembershipsHandler := membershipPres.NewGetUserMembershipsHandler(getUserMembershipsCommand, observer)
-	getMembershipsByFamilyCommand := membershipApp.NewGetMembershipsByFamilyHandler(dbMembership, dbUser, dbRole, dbFamily)
-	getMembershipsByFamilyHandler := membershipPres.NewGetMembershipsByFamilyHandler(getMembershipsByFamilyCommand)
 	getInvitationsToFamilyByReceiverIdCommand := invitationToFamilyApp.
 		NewGetInvitationsToFamilyByReceiverIdHandler(dbInvitationToFamily, dbUser, dbFamily, dbRole, observer)
 	getInvitationsToFamilyByReceiverIdHandler := invitationToFamilyPres.NewGetInvitationsToFamilyByReceiverIdHandler(
@@ -197,9 +166,6 @@ func main() {
 	addInvitationToFamilyCommand := invitationToFamilyApp.NewAddInvitationToFamilyHandler(
 		dbInvitationToFamily, dbUser, dbRole, dbFamily, observer)
 	addInvitationToFamilyHandler := invitationToFamilyPres.NewAddInvitationToFamilyHandler(addInvitationToFamilyCommand, observer)
-	addMembershipByInvitationCommand := membershipApp.NewAddMembershipByInvitationHandler(
-		dbInvitationToFamily, dbMembership, dbUser, dbRole, dbFamily)
-	addMembershipByInvitationHandler := membershipPres.NewAddMembershipByInvitationHandler(addMembershipByInvitationCommand)
 	changeMembershipCommand := membershipApp.NewChangeFamilyMembershipHandler(dbFamily, dbMembership, observer)
 	changeFamilyMembershipHandler := membershipPres.NewChangeFamilyMembershipHandler(changeMembershipCommand, observer)
 	deleteUserMembershipCommand := membershipApp.NewDeleteUserMembershipHandler(dbMembership, dbUser, observer)
@@ -215,13 +181,6 @@ func main() {
 		dbNotificationFrequency, observer)
 	getAllNotificationFrequenciesHandler := notificationFrequencyPres.NewGetAllNotificationFrequenciesHandler(
 		getAllNotificationFrequenciesCommand, observer)
-	//getAllMessengerTypesCommand := messenger_type.NewGetAllMessengerTypesHandler(dbMessengerType, observer)
-	//getAllMessengerTypesHandler := messengertype2.NewGetAllMessengerTypesHandler(
-	//	getAllMessengerTypesCommand, observer)
-
-	//getAllNotificationTypesCommand := notification_type.NewGetAllNotificationTypesHandler(dbNotificationType, observer)
-	//getAllNotificationTypesHandler := notificationtype2.NewGetAllNotificationTypesHandler(
-	//	getAllNotificationTypesCommand, observer)
 
 	getAvailableNotificationSendersCommand := notificationSettingApp.NewGetAvailableNotificationSendersHandler(dbUser, dbFamily,
 		dbMembership, observer)
@@ -239,10 +198,6 @@ func main() {
 	getBatterySettingsCommand := notificationSettingApp.NewGetBatterySettingsHandler(dbNotificationSetting,
 		dbNotificationFrequency, dbUser, dbFamily, dbZone, observer)
 	getBatterySettingsHandler := notificationSettingPres.NewGetBatterySettingsHandler(getBatterySettingsCommand, observer)
-	getNotificationsSendersByReceiverCommand := notificationSettingApp.NewGetNotificationsSendersByReceiverHandler(
-		dbNotificationSetting, dbUser)
-	getNotificationsSendersByReceiverHandler := notificationSettingPres.NewGetNotificationsSendersByReceiverHandler(
-		getNotificationsSendersByReceiverCommand)
 	changeNotificationSettingCommand := notificationSettingApp.NewChangeNotificationSettingHandler(
 		dbNotificationSetting, dbNotificationFrequency, dbMembership, dbUser, dbFamily, dbRole, dbZone, observer)
 	changeNotificationSettingHandler := notificationSettingPres.NewChangeNotificationSettingHandler(
@@ -256,12 +211,6 @@ func main() {
 	addTgLinkHandler := integration2.NewAddTgLinkHandler(addTgLinkCommand, observer)
 	addTgConnectionCommand := integration.NewAddTgConnectHandler(dbUser, dbIntegration, observer)
 	addTgConnectionHandler := integration2.NewAddTgConnectHandler(addTgConnectionCommand, observer)
-	//getNotificationLogsCommand := notification_log.NewGetNotificationLogsHandler(dbNotificationLog)
-	//getNotificationLogsHandler := notification_log2.NewGetNotificationLogsHandler(getNotificationLogsCommand)
-	//getUserNotificationLogsCommand := notification_log.NewGetUserNotificationLogsHandler(
-	//	dbNotificationLog, dbNotificationSetting)
-	//getUserNotificationLogsHandler := notification_log2.NewGetUserNotificationLogsHandler(
-	//	getUserNotificationLogsCommand)
 
 	securityMiddleware := http.NewSecurityMiddleware(observer, hydraService)
 
@@ -290,50 +239,12 @@ func main() {
 	app.Get("/families/:id/senders", securityMiddleware.Handle, getAvailableNotificationSendersHandler.Handle) // проверить
 	app.Get("/users", securityMiddleware.Handle, getUsersHandler.Handle)
 	app.Get("/users/locations", securityMiddleware.Handle, getUserLocationsHandler.Handle)
-
 	app.Patch("/notifications_settings", changeNotificationSettingHandler.Handle)
 	app.Delete("/notifications_settings/:id", deleteNotificationSettingHandler.Handle)
-	//app.Get("/users/:id", getUserHandler.Handle)
-	//app.Delete("/families/:family_id/zones/:zone_id", deleteFamilyZoneHandler.Handle)
-	//app.Get("/messenger_types", getAllMessengerTypesHandler.Handle)
-	//app.Get("/notification_types", getAllNotificationTypesHandler.Handle)
-	//app.Patch("/users", changeUserHandler.Handle)
-	//app.Post("/zones", addZoneHandler.Handle)
-	//app.Get("/users/:id/zones", getZonesByUserIDHandler.Handle)
-
-	app.Patch("/users_restore/:id", restoreUserHandler.Handle)
-	app.Get("/families/:id", getFamilyHandler.Handle)
-	app.Get("/users_families/:user_id", getUserFamiliesHandler.Handle)
-
-	app.Delete("/families/:id", deleteFamilyHandler.Handle)
-
-	//app.Delete("/families_zones/:id", deleteFamilyZonesHandler.Handle)
-
-	//app.Delete("/users/:id", deleteUserHandler.Handle)
-
-	app.Get("/zones/:id", getZoneHandler.Handle)
-
-	app.Get("/zones", getAllZonesHandler.Handle)
-
-	//app.Post("/roles", addRoleHandler.Handle)
 	app.Get("/roles/:id", securityMiddleware.Handle, getRoleHandler.Handle)
 	app.Get("/roles", getAllRolesHandler.Handle)
 
-	app.Post("/memberships_by_invitations/:invitation_id", addMembershipByInvitationHandler.Handle)
-
-	app.Get("/memberships/:family_id", getMembershipsByFamilyHandler.Handle)
-	app.Get("/users_invitations/:user_id", getInvitationsToFamilyByReceiverIdHandler.Handle)
-
-	app.Get("/notifications_senders/:receiver_id", getNotificationsSendersByReceiverHandler.Handle)
-
-	//app.Get("/notifications_logs", getNotificationLogsHandler.Handle)
-	//app.Get("/users_notifications_logs/:user_id", getUserNotificationLogsHandler.Handle)
-
 	log.Info("Starting app")
-	//routes := app.GetRoutes()
-	//for _, route := range routes {
-	//	observer.Logger.Info().Msgf("Route added: [%s]: %s", route.Method, route.Path)
-	//}
 	err = app.Listen(fmt.Sprintf(":%s", cfg.API.Port))
 	if err != nil {
 		log.Fatalf("failed to start server: %v", err)
